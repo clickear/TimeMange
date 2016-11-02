@@ -9,9 +9,7 @@
     <script src='./scripts/libs/jquery.min.js'></script>
     <script src='./scripts/libs/calendra/fullcalendar.js'></script>
     <script>
-//中文2ss
         $(document).ready(function() {
-
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next today',
@@ -93,34 +91,28 @@
 
                 }
             });
-
         });
-
     </script>
     <style>
-
         body {
             margin: 40px 10px;
             padding: 0;
             font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
             font-size: 14px;
         }
-
         #calendar {
             max-width: 900px;
             margin: 0 auto;
             width: 400px;
         }
-
         .fc-day.fc-widget-content.sign{
             background:#fff url(http://i2.piimg.com/508767/a9576b09fc014d6e.png) no-repeat center;
             background-position-y: 2px;
         }
+
     </style>
 </head>
 <body>
-
 <div id='calendar'></div>
-<div>sdf ssdsssf</div>
 </body>
 </html>

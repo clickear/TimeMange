@@ -8711,7 +8711,7 @@ var View = FC.View = Class.extend(EmitterMixin, ListenerMixin, {
 		);
 	},
 
-
+    // todo
 	// Must be called when an event in the view is dropped onto new location.
 	// `dropLocation` is an object that contains the new zoned start/end/allDay values for the event.
 	reportEventDrop: function(event, dropLocation, largeUnit, el, ev) {
