@@ -38,7 +38,11 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>6.0.4</version>
     </dependency>
-
+    <dependency>
+      <groupId>com.github.scribejava</groupId>
+      <artifactId>scribejava-apis</artifactId>
+      <version>3.2.0</version> // please use always the latest version
+    </dependency>
   </dependencies>
 
   <build>
