@@ -1,5 +1,8 @@
 package com.clickear.servlet;
 
+import com.clickear.pcs.OAuthBuilder;
+import com.clickear.pcs.OAuthService;
+
 import javax.naming.Context;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,18 +33,21 @@ public class Oauth2 extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
-
-        final String clientId = "c774a0b7d7c450193689";
-        final String clientSecret = "0a8cf7435cf2b5a9bc857c9643f608efe967ea01";
         String code = request.getParameter("code");
-        String callback = "http://localhost:8080/callback";
+        OAuthService service = new OAuthBuilder()
+                .accessTokenEndpoint("https://github.com/login/oauth/access_token")
+                .apiKey("c774a0b7d7c450193689")
+                .apiSecret("0a8cf7435cf2b5a9bc857c9643f608efe967ea01")
+                .callback("http%3A%2F%2Flocalhost%3A8080%2Fcallback")
+                //  .callback("http://localhost:8080/callback")
+                .build();
 
-       String url = String.format("https://github.com/login/oauth/access_token?grant_type=%s&client_id=%s&client_secret=%s&code=%s&redirect_uri=%s", "authorization_code", clientId, clientSecret, code, callback);
+        String accessToken = service.getAccessToken(code);
 
-
-        String result = "";
-        String urlNameString = "http://openapi.baidu.com/oauth/2.0/authorize?response_type=token&client_id=CuOLkaVfoz1zGsqFKDgfvI0h&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Findex&scope=netdisk&display=popup";
-        URL realUrl = new URL(url);
+         String result = "";
+        String line="";
+        String urlNameString = "https://api.github.com/user?access_token="+accessToken;
+        URL realUrl = new URL(urlNameString);
         // 打开和URL之间的连接
         URLConnection connection = realUrl.openConnection();
         // 设置通用的请求属性
@@ -52,59 +58,17 @@ public class Oauth2 extends HttpServlet {
         // 建立实际的连接
         connection.connect();
         // 获取所有响应头字段
-        Map<String, List<String>> map = connection.getHeaderFields();
-        // 遍历所有的响应头字段
-        for (String key : map.keySet()) {
-            System.out.println(key + "--->" + map.get(key));
-        }
+
         // 定义 BufferedReader输入流来读取URL的响应
         BufferedReader in = new BufferedReader(new InputStreamReader(
                 connection.getInputStream(),"utf-8"));
-        String line;
         while ((line = in.readLine()) != null) {
             result += line;
         }
 
-        String[] m_parm = result.split("&");
-        String accesToken = "";
-        for(String m_key :m_parm)
-        {
-            if(m_key.indexOf('=')>0)
-            {
-                String m_k = m_key.substring(0,m_key.indexOf('='));
-                String m_v = m_key.substring(m_key.indexOf('=')+1);
-                if(m_k.equals("access_token"))
-                {
-                    accesToken = m_v;
-                }
-            }
-        }
 
-         result = "";
-         line="";
-        urlNameString = "https://api.github.com/user?access_token=6dd17d3f6257bdeb8a289f8081021b04ab428749";
-        realUrl = new URL(urlNameString);
-        // 打开和URL之间的连接
-        connection = realUrl.openConnection();
-        // 设置通用的请求属性
-        connection.setRequestProperty("accept", "*/*");
-        connection.setRequestProperty("connection", "Keep-Alive");
-        connection.setRequestProperty("user-agent",
-                "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
-        // 建立实际的连接
-        connection.connect();
-        // 获取所有响应头字段
-        map = connection.getHeaderFields();
-        // 遍历所有的响应头字段
-        for (String key : map.keySet()) {
-            System.out.println(key + "--->" + map.get(key));
-        }
-        // 定义 BufferedReader输入流来读取URL的响应
-        in = new BufferedReader(new InputStreamReader(
-                connection.getInputStream(),"utf-8"));
-        while ((line = in.readLine()) != null) {
-            result += line;
-        }
+
+
         out.write(result);
 
     }

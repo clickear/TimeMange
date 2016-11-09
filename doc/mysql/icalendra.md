@@ -17,6 +17,19 @@ CREATE TABLE `task_events` (
 
 ``` 
 
-
+CREATE TABLE `mydb`.`sys_user` (
+  `userId` BIGINT(20) NOT NULL COMMENT '用户表',
+  `userName` VARCHAR(100) NULL COMMENT '用户昵称',
+  `avatar` VARCHAR(100) NULL COMMENT '用户头像地址',
+  PRIMARY KEY (`userId`)
+  );
+  
+CREATE TABLE `mydb`.`sys_user_auth` (
+  `auth_id` BIGINT(20) NOT NULL,
+  `user_id` BIGINT(20) NULL,
+  `identity_type` VARCHAR(100) NULL COMMENT '登录类型（手机号 邮箱 用户名）或第三方应用名称（微信 微博等）',
+  `identifier` VARCHAR(100) NULL COMMENT '标识（手机号 邮箱 用户名或第三方应用的唯一标识）',
+  `credential` VARCHAR(100) NULL COMMENT '密码凭证（站内的保存密码，站外的不保存或保存token）',
+  PRIMARY KEY (`auth_id`));
 
 
