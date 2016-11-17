@@ -3,9 +3,6 @@ package com.clickear.servlet;
 import com.clickear.model.EventsObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mysql.cj.jdbc.*;
-import com.mysql.cj.jdbc.PreparedStatement;
-import org.joda.time.DateTime;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

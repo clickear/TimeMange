@@ -2,6 +2,7 @@ package com.clickear.servlet;
 
 import com.clickear.pcs.OAuthBuilder;
 import com.clickear.pcs.OAuthService;
+import com.clickear.utils.MyGsonLib;
 
 import javax.naming.Context;
 import javax.servlet.ServletException;
@@ -9,12 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 
@@ -66,10 +66,15 @@ public class Oauth2 extends HttpServlet {
             result += line;
         }
 
+       // Charset charset = Charset.forName()
 
+        //  BufferedOutputStream()
+        // 字节OutputStream
 
-
-        out.write(result);
+        //Writer
+        // 字符串
+       String id = MyGsonLib.asObject(result,"id",String.class);
+        out.write(id);
 
     }
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clickear.model.Auth"> <!-- 在select标签中编写查询的SQL语句， 设置select标签的id属性为getUser，id属性值必须是唯一的，不能够重复 使用parameterType属性指明查询时使用的参数类型，resultType属性指明查询返回的结果集类型 resultType="com.oumyye.model.User"就表示将查询结果封装成一个User类的对象返回 User类就是users表所对应的实体类 --> <!-- 根据id查询得到一个user对象 -->
+    <select id="getAuth" parameterType="Integer"
+            resultType="com.clickear.model.Auth" resultMap="classResultMap"> select * from sys_auth where auth_id=#{id} </select>
+    <resultMap type="com.clickear.model.Auth" id="classResultMap">
+        <id property="auth_id" column="auth_id" />
+        <result property="apiKey" column="api_key" />
+        <result property="apiSecret" column="api_secret" />
+        <result property="callback" column="callback" />
+        <result property="accesstokenUrl" column="accesstoken_url" />
+        <result property="accesstokenAuthUrl" column="accesstoen_auth_url" />
+        <result property="authCode" column="auth_code" />
+        <result property="authType" column="auth_type" />
+        <result property="authName" column="auth_name" />
+        <result property="authCheckCode" column="auth_check_code" />
+        <result property="authCheckUrl" column="auth_check_url" />
+    </resultMap>
+</mapper>

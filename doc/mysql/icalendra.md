@@ -32,4 +32,20 @@ CREATE TABLE `mydb`.`sys_user_auth` (
   `credential` VARCHAR(100) NULL COMMENT '密码凭证（站内的保存密码，站外的不保存或保存token）',
   PRIMARY KEY (`auth_id`));
 
+DROP TABLE IF EXISTS `sys_auth`;
+
+CREATE TABLE `sys_auth` (
+  `auth_id` bigint(20) NOT NULL,
+  `api_key` varchar(100) DEFAULT NULL COMMENT '客户端apiKey',
+  `api_secret` varchar(100) DEFAULT NULL COMMENT '客户端apiSecret',
+  `callback` varchar(100) DEFAULT NULL COMMENT '回调网址',
+  `accesstoken_url` varchar(100) DEFAULT NULL COMMENT '获取token地址',
+  `accesstoen_auth_url` varchar(100) DEFAULT NULL COMMENT '获取auth地址',
+  `auth_code` varchar(100) DEFAULT NULL,
+  `auth_type` tinyint(4) DEFAULT NULL COMMENT '类型，比如1 代表github',
+  `auth_name` varchar(100) DEFAULT NULL COMMENT '名称 github',
+  `auth_check_code` varchar(100) DEFAULT NULL COMMENT '用于获取唯一Id值',
+  `auth_check_url` varchar(100) DEFAULT NULL COMMENT '获取用户信息',
+  PRIMARY KEY (`auth_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
