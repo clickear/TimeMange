@@ -49,6 +49,11 @@
       <artifactId>scribejava-apis</artifactId>
       <version>3.2.0</version> // please use always the latest version
     </dependency>
+    <dependency>
+      <groupId>com.qcloud</groupId>
+      <artifactId>cos_api</artifactId>
+      <version>4.2</version>
+    </dependency>
   </dependencies>
 
   <build>
